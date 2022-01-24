@@ -1,0 +1,40 @@
+create table if not exists batch_11.dataverse11_1
+(
+  id int primary key,
+  nama_depan varchar (255) not null,
+  nama_belakang varchar (255) not null,
+  email varchar (255) not null,
+  link_linkedin varchar (255) not null unique,
+  pekerjaan_impian varchar (255) not null,
+  alasan_suignup_digitalskola varchar (255) not null
+)
+
+insert into batch_11.dataverse11_1
+values
+(
+	3,'Indra','Aminudin',
+	'aminudin.indra@gmail.com',
+	'https://www.linkedin.com/in/indra-aminudin-26945148/',
+	'Data Science',
+	'Upgrade Skill dan Capability'
+)
+
+SELECT
+  COLUMN_NAME, DATA_TYPE 
+FROM
+  INFORMATION_SCHEMA.COLUMNS 
+WHERE
+  TABLE_SCHEMA = 'batch_11'
+AND
+  TABLE_NAME = 'dataverse11_1';
+ 
+
+ALTER TABLE batch_11.dataverse11_1
+	ADD CONSTRAINT uniquectm_const UNIQUE (link_linkedin);
+
+BEGIN;
+ALTER TABLE batch_11.dataverse11_1.link_linkedin DROP constraint unique
+ALTER TABLE batch_11.dataverse11_1.link_linkedin ADD CONSTRAINT unique
+COMMIT;
+
+UPPER(LEFT(name,1) || SUBSTRING(name from 2 for (CHAR_LENGTH(name) - 1)))
